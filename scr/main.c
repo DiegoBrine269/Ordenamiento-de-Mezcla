@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <conio.h>
 #include <stdlib.h>
-#include "mezcla.c"
+#include "mezcla.h"
 
 //variables globales
 #define N 10
@@ -13,7 +13,6 @@ void imprimirArreglo (int *a);
 
 int main ()
 {
-
     inicializarValores(arreglo);
     imprimirArreglo(arreglo);
     ordenamientoPorMezcla(arreglo);
@@ -26,16 +25,20 @@ int main ()
 
 void inicializarValores (int *a)
 {
-    printf("Arreglo inicial: ");
+    
     for (int i=0; i<N; i++)
     {
-        a[i] = rand() % 11;
+        if(i % 2 == 0)
+            a[i] = rand() % 11+5;
+        else
+            a[i] = rand() % 11-5;
     }
         
 }
 
 void imprimirArreglo (int *a)
 {
+    printf("\nArreglo: ");
     for(int i=0; i<N; i++)
     {
         printf("%d, ", * a+i);

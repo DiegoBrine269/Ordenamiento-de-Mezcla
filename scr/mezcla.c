@@ -1,56 +1,75 @@
 #include "mezcla.h"
 
 /*Este método es recursivo y se ejecuta cada que el arreglo se divide a la mitad*/
-void ordenamientoPorMezcla(int *arregloCompleto)
+void mezcla (int arregloCompleto, int l, int m, int r)
 {
     int i=0, j=0, k=0;
-    if(sizeof arregloCompleto > 1)
+    int n1 = m - l + 1;
+    int n2 = r - m;
+
+    //arreglos temporales
+    int L[n1], R[n2]; //L = mitad izquierda, R = mitad derecha
+
+    //Copiamos datos a arreglos temporales 
+    for(i=0; i<n1; i++)
     {
-        int mitad = (sizeof arregloCompleto)/2;
-        int mitadIzq [mitad];
-        int mitadDer [mitad];
-        inicializarMitad(mitadIzq, arregloCompleto, 0, mitad-1);
-        inicializarMitad(mitadDer, arregloCompleto, mitad, sizeof arregloCompleto);
+       L[i] = arregloCompleto[l+1]; 
+    }
+    
+    for(j=0; j<n2; j++)
+    {
+        R[j] = arregloCompleto[m+1+j];
+    }
+    
+    i=0, j=0, k=l;
+    //i es el index para el primer subarreglo
+    //j es el index para el segundo subarreglo
+    //k es el index para el subarreglo combinado
 
-        ordenamientoPorMezcla(mitadIzq);
-        ordenamientoPorMezcla(mitadDer);
-
-        while((i<sizeof mitadIzq) && (j < sizeof mitadDer))
+    while(i<n1 && j<n2)
+    {
+        if(L[i] <= R[j])
         {
-            if(mitadIzq[i] < mitadDer [j])
-            {
-                arregloCompleto[k] = mitadIzq[j];
-                i++;
-            }
-            else
-            {
-                arregloCompleto[k] = mitadDer[j];
-            }
-            k++;
-        }
-
-        while(i<sizeof mitadIzq)
-        {
-            arregloCompleto [k] = mitadIzq[i];
+            arregloCompleto[k] = L[i];
             i++;
-            k++;
         }
-
-        while (j<sizeof mitadDer)
+        else
         {
-            arregloCompleto[k] = mitadDer[j];
+            arregloCompleto[k] = R[j];
             j++;
-            k++;
         }
+        k++;
+    }
+
+    //este ciclo copia los elementos que queden en L
+    while(i<n1)
+    {
+        arregloCompleto[k] = L[i];
+        i++;
+        k++;
+    }
+
+    //este ciclo copia los elementos que queden en R
+    while(i<n2)
+    {
+        arregloCompleto[k] = r[i];
+        j++;
+        k++;
     }
 }
 
-/*Este método inicializa al arreglo partido*/
-void inicializarMitad(int *arregloMitad, int *arregloOriginal, int inicio, int fin)
+void ordenamientoPorMezcla(int *arregloCompleto, int l, int r)
 {
-    for(int i=inicio; i<fin; i++)
+    if(l<r)
     {
-        arregloMitad[i] = arregloOriginal[i+inicio];
+        int m = l + (r-1)/2;
+
+        ordenamientoPorMezcla(arregloCompleto, l, m);
+        ordenamientoPorMezcla(arregloCompleto, m+1, r);
+
+        mezcla(arregloCompleto, l, m, r);
+
     }
 }
+
 
