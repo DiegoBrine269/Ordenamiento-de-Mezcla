@@ -1,7 +1,9 @@
 #include "mezcla.h"
+#include <stdio.h>  
+#include <stdlib.h>  
 
 /*Este método es recursivo y se ejecuta cada que el arreglo se divide a la mitad*/
-void mezcla (int arregloCompleto, int l, int m, int r)
+void mezcla (int arregloCompleto[], int l, int m, int r)
 {
     int i=0, j=0, k=0;
     int n1 = m - l + 1;
@@ -52,13 +54,13 @@ void mezcla (int arregloCompleto, int l, int m, int r)
     //este ciclo copia los elementos que queden en R
     while(i<n2)
     {
-        arregloCompleto[k] = r[i];
+        arregloCompleto[k] = R[j];
         j++;
         k++;
     }
 }
 
-void ordenamientoPorMezcla(int *arregloCompleto, int l, int r)
+void ordenamientoPorMezcla(int arregloCompleto[], int l, int r)
 {
     if(l<r)
     {
@@ -69,6 +71,15 @@ void ordenamientoPorMezcla(int *arregloCompleto, int l, int r)
 
         mezcla(arregloCompleto, l, m, r);
 
+    }
+}
+
+void imprimirArreglo (int a[], int tamano)
+{
+    printf("\nArreglo: ");
+    for(int i=0; i<tamano; i++)
+    {
+        printf("%d, ", a[i]);
     }
 }
 
