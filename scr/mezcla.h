@@ -1,11 +1,7 @@
 #ifndef mezcla_h
 
-#include <stdio.h>  
-#include <stdlib.h>  
-
-void ordenamientoPorMezcla(int arregloCompleto[], int l, int r);
-void mezcla (int arregloCompleto[], int l, int m, int r);
-void imprimirArreglo (int a[], int tamano);
-
+void mezcla(int arr[], int l, int m, int r);
+void ordenamientoMezcla(int arr[], int l, int r);
+void imprimirArreglo(int A[], int size);
 
 #endif
